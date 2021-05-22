@@ -15,7 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
+from blog.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('',home,name="home"),
+    path('<str:id>',detail,name="detail"), #매개변수로 들어가고 값에 따라 페이지 달라짐
 ]

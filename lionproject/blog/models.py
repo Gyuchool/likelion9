@@ -9,3 +9,6 @@ class Blog(models.Model): #models class 내의 method사용, id column auto crea
     def __str__(self):
         return self.title
 
+    def summary(self):
+        return self.body[:100]
+
