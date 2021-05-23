@@ -1,5 +1,5 @@
-<h1>Update Your blog</h1>
-
+{% extend 'base.html' %}
+{% block content %}
 <form action="{%url 'update' blog.id %}" method="post">
     {%csrf_token%}
     <p>제목: <input type="text" name="title" value="{{blog.title}}"></p>
@@ -7,3 +7,5 @@
     본문: <textarea name="body" id="" cols="30" rows="10">{{blog.body}}</textarea>
     <button type="submit">submit</button>
 </form>
+
+{% endblock %}
