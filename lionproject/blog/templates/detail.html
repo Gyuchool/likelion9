@@ -8,7 +8,10 @@
         날짜: {{blog.pub_date}}
     </div>
   
-    <br>
+    <hr>
+    {% if blog.image %}
+    <p><img src="{{blog.image.url}}" alt="" width="500" height="500"></p>
+    {% endif %}
     <p>{{blog.body}}</p>
     <a href="{% url 'edit' blog.id %}">수정하기</a>
     <a href="{% url 'delete' blog.id %}">삭제하기</a>
