@@ -1,11 +1,26 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Blog
 from django.utils import timezone
+from django.core.paginator import Paginator
 from .forms import BlogForm
 
+
 # Create your views here.
+# all get order_by filter exclude
+#READ
+
 def home(request):
-    blogs = Blog.objects.all()
+    blogs = Blog.objects.order_by('-pub_date')#-는 역순으로 하여 최신 순서가 먼저 오도록 함.
+
+    search = request.GET.get('search')
+    if search == 'true':
+        author = request.GET.get('writer')
+        blogs = Blog.objects.filter(writer=author).order_by('-pub_date')
+        return render(request, 'home.html', {'blogs':blogs})
+
+    paginator = Paginator(blogs, 3)
+    page = request.GET.get('page')
+    blogs = paginator.get_page(page)
     return render(request,'home.html',{'blogs':blogs})
 
 def detail(request, id):
